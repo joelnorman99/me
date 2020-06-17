@@ -12,7 +12,15 @@ def loop_ranger(start, stop=None, step=1):
     The look up the docs for range(), you can answer this with just the range 
     function, but we'd like you to do it the long way, probably using a loop.
     """
-    return None
+    list_numbers = []
+    x = start
+    while x < stop:
+        print(x)
+        list_numbers.append(x)
+        x = x + step
+
+    return list_numbers
+
 
 
 def lone_ranger(start, stop, step):
@@ -20,7 +28,10 @@ def lone_ranger(start, stop, step):
 
     Look up the docs for range() and wrap it in a 1:1 way
     """
-    return None
+    returning_stuff = []
+    for i in range(start, stop, step):
+        returning_stuff.append(i)
+    return returning_stuff
 
 
 def two_step_ranger(start, stop):
@@ -29,7 +40,10 @@ def two_step_ranger(start, stop):
     Sometimes you want to hide complexity.
     Make a range function that always has a step size of 2
     """
-    return None
+    two_step = []
+    for i in range(start, stop, 2):
+        two_step.append(i)
+    return two_step
 
 
 def stubborn_asker(low, high):
@@ -40,7 +54,16 @@ def stubborn_asker(low, high):
 
     Look up the docs for input
     """
-    return None
+    out_of_bounds = False
+    while not out_of_bounds:
+        guess = int(input("enter the number: "))
+        if low <= guess <= high:
+            print("Who's the goodest good boy?")
+            return guess
+        elif guess < low:
+            print("HIGHER")
+        elif guess > high:
+            print("LOWER")
 
 
 def not_number_rejector(message):
@@ -50,7 +73,17 @@ def not_number_rejector(message):
     (e.g. "cow", "six", "8!") then throw it out and ask for an actual number.
     When you do get a number, return it.
     """
-    return None
+    actual_number = False
+    
+    while not actual_number:
+        guess = str(input("Number Wanted "))
+        if guess.isdigit():
+            return int(guess)
+            actual_number = True
+        else:
+            print("Not a number")
+
+        
 
 
 def super_asker(low, high):
