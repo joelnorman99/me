@@ -76,10 +76,10 @@ def not_number_rejector(message):
     actual_number = False
     
     while not actual_number:
-        guess = str(input("Number Wanted "))
+        guess = str(input(message))
         if guess.isdigit():
-            return int(guess)
             actual_number = True
+            return int(guess)
         else:
             print("Not a number")
 
@@ -94,7 +94,18 @@ def super_asker(low, high):
     Try to call at least one of the other functions to minimise the
     amount of code.
     """
-    return None
+    Robust = False
+
+    while Robust == False:
+        guess = not_number_rejector("Guess a number: ")
+        if low < guess < high:
+            Robust = True
+            print("You got it")
+            return guess
+        elif guess < low or guess > high:
+            print("Out of range")
+
+
 
 
 if __name__ == "__main__":
