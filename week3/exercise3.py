@@ -7,7 +7,6 @@ import random
 
 def not_number_rejector(message):
     """Ask for a number repeatedly until actually given one.
-
     Ask for a number, and if the response is actually NOT a number 
     (e.g. "cow", "six", "8!") then throw it out and ask for an actual number.
     When you do get a number, return it.
@@ -21,6 +20,7 @@ def not_number_rejector(message):
             return int(guess)
         else:
             print("Not a number")
+
 
 
 
@@ -43,6 +43,7 @@ def advancedGuessingGame():
     Remember to think modular. Try to keep your functions small and single
     purpose if you can!
     """
+
     print("\nWelcome to the guessing game!")
     print("A number between _ and _ ?")
 
@@ -58,7 +59,8 @@ def advancedGuessingGame():
         print("The upperbound is lower than you lowerbound: TRY AGAIN")
         
       #above code ensures upper > lower, see stubbon_asker in EX1 
-    
+
+
     print("OK then, guess a number between {} and {} ?".format(lowerBound,upperBound))
     lowerBound = int(lowerBound) #ensures integer is give (Not a letter)
     upperBound = int(lowerBound) 
@@ -68,15 +70,19 @@ def advancedGuessingGame():
     guessed = False
 
     while not guessed:
-        guessedNumber = int(input("Guess a number: "))
-        print("You guessed {},".format(guessedNumber),)
-        if guessedNumber == actualNumber:
-            print("HOW DID YOU GET THAT! It was {}".format(actualNumber))
-            guessed = True
-        elif guessedNumber < actualNumber:
-            print("Guess is too small, try again ".format(actualNumber))
-        else:
-            print("Guess is too big, try again ".format(actualNumber))
+      guessedNumber = not_number_rejector("Make a guess: ")
+      print("You guessed {},".format(guessedNumber),)
+      if guessedNumber == actualNumber:
+        print("HOW DID YOU GET THAT! It was {}".format(actualNumber))
+        guessed = True
+      elif guessedNumber > upperBound:
+        print("This is higher than the upperbound! Try again!")
+      elif guessedNumber < lowerBound:
+        print("This is lower than the lowerbound! Try again!")
+      elif guessedNumber < actualNumber:
+        print("Guess is too small, try again".format(actualNumber))
+      else:
+        print("Guess is too big, try again ".format(actualNumber)")
     return "You got it!"
     # the tests are looking for the exact string "You got it!". Don't modify that!
 
