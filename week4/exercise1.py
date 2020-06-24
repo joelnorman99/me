@@ -153,13 +153,15 @@ def diarist():
     TIP: this might come in handy if you need to hack a 3d print file in the future.
     """
 
-    gcode_data = open(LOCAL + "/Trispokedovetiles(laser).gcode").read()
-    M10_count = gcode_data.count("M10 P1")
-    print(M10_count)
-
-    lasers_count = open("lasers.pew", "w")
-    lasers_count.write(str(M10_count))
-    lasers_count.close()
+    gcode_data = open(LOCAL + "/Trispokedovetiles(laser).gcode").readlines()
+    ON_OFF_COUNT = 0
+    for line in gcode_data:
+        print(line)
+        if "M10 P1" in line:
+            ON_OFF_COUNT += 1
+    f = open("lasers.pew", "w")
+    f.write(str(ON_OFF_COUNT))
+    f.close
 
 
 if __name__ == "__main__":
