@@ -159,7 +159,7 @@ def diarist():
         print(line)
         if "M10 P1" in line:
             ON_OFF_COUNT += 1
-    f = open("lasers.pew", "w")
+    f = open("week4/lasers.pew", "w")
     f.write(str(ON_OFF_COUNT))
     f.close
 
