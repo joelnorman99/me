@@ -91,6 +91,7 @@ def abba(source="abba", guard=3):
     aobaobbbabbaoaaobbbaoaaobaobaobbba
                 and so on...
     """
+
     def apply_rules(letter, guard):
         """Control the substitution.
 
@@ -107,23 +108,39 @@ def abba(source="abba", guard=3):
         else:
             return letter
 
-    # write the rest of the function here
-    pass
+    # parts = list(source)
+    # results = list(map(apply_rules, parts))
+    # new_letters = "".join(results)
+    # if guard > 0:
+    #     return apply_rules(new_letters, guard)
+    # else:
+    #     return new_letters
+
+    parts = list(source)
+    result = []
+    for i in parts:
+        result.append(apply_rules(i, guard))
+    new_letters = "".join(result)
+    guard -= 1
+    if guard > 0:
+        return abba(new_letters, guard)
+    else:
+        return new_letters
 
 
 def koch(t, order, size):
     """Make turtle t draw a Koch fractal of 'order' and 'size'."""
     trace = ""
-    if order == 0:          # The base case is just a straight line
+    if order == 0:  # The base case is just a straight line
         t.forward(size)
     else:
-        trace += koch(t, order-1, size/3)   # Go 1/3 of the way
+        trace += koch(t, order - 1, size / 3)  # Go 1/3 of the way
         t.left(60)
-        trace += koch(t, order-1, size/3)
+        trace += koch(t, order - 1, size / 3)
         t.right(120)
-        trace += koch(t, order-1, size/3)
+        trace += koch(t, order - 1, size / 3)
         t.left(60)
-        trace += koch(t, order-1, size/3)
+        trace += koch(t, order - 1, size / 3)
     return str(order) + trace
 
 
@@ -152,9 +169,20 @@ def square_koch(t, order, size):
 
     """
     trace = ""
-    # write the rest of the function here.
+    if order == 0:  # The base case is just a straight line
+        t.forward(size)
+    else:
+        trace += square_koch(t, order - 1, size / 3)  # Go 1/3 of the way
+        t.left(90)
+        trace += square_koch(t, order - 1, size / 3)
+        t.right(90)
+        trace += square_koch(t, order - 1, size / 3)
+        t.right(90)
+        trace += square_koch(t, order - 1, size / 3)
+        t.left(90)
+        trace += square_koch(t, order - 1, size / 3)
+
     return str(order) + trace
-    pass
 
 
 def draw_square(steps=4):
@@ -167,7 +195,7 @@ def draw_pointy(steps=4):
     return draw_koch(drawing_method=koch, steps_deep=steps)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     print(draw_koch(drawing_method=square_koch, steps_deep=2))
     print(draw_koch(drawing_method=square_koch, steps_deep=3))
     print(draw_koch(drawing_method=square_koch, steps_deep=4))
