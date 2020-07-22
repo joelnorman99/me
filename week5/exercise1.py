@@ -17,45 +17,13 @@ you'll need to figure out for yourself what to do.
 import requests
 import math
 
-# This is a terrible function. The rest of the functions in this file do a
-# much better job of what it's trying to do. Once you've has a little look,
-# move on, and eventually delete this function. (And this comment!)
-# def do_bunch_of_bad_things():
-#     print("Getting ready to start in 9")
-#     print("Getting ready to start in 8")
-#     print("Getting ready to start in 7")
-#     print("Getting ready to start in 6")
-#     print("Getting ready to start in 5")
-#     print("Getting ready to start in 4")
-#     print("Getting ready to start in 3")
-#     print("Getting ready to start in 2")
-#     print("Getting ready to start in 1")
-#     print("Let's go!")
 
-#     triangle = {"base": 3, "height": 4}
-#     triangle["hypotenuse"] = triangle["base"] ** 2 + triangle["height"] ** 2
-#     print("area = " + str((triangle["base"] * triangle["height"]) / 2))
-#     print("side lengths are:")
-#     print("base: {}".format(triangle["base"]))
-#     print("height: {}".format(triangle["height"]))
-#     print("hypotenuse: {}".format(triangle["hypotenuse"]))
-
-#     another_hyp = 5 ** 2 + 6 ** 2
-#     print(another_hyp)
-
-#     yet_another_hyp = 40 ** 2 + 30 ** 2
-#     print(yet_another_hyp)
-
-
-# return a list of countdown messages, much like in the bad function above.
-# It should say something different in the last message.
 def countdown(message, start, stop, completion_message):
 
-    count_down = []
-    for j in range(start - stop + 1, stop - stop, -1):
-        print(message, str(j))
+    while start >= stop:
+        print(message + " " + str(start))
+        start = start - 1
     print(completion_message)
-    return count_down
 
 
 # TRIANGLES
@@ -83,6 +51,7 @@ def calculate_perimeter(base, height):
 
 
 def calculate_aspect(base, height):
+    aspect = []
     if height > base:
         aspect = "tall"
     elif base > height:
@@ -96,7 +65,7 @@ def calculate_aspect(base, height):
 # Don't reinvent the wheel
 def get_triangle_facts(base, height, units="mm"):
     return {
-        "area": calculate_hypotenuse(base, height),
+        "area": calculate_area(base, height),
         "perimeter": calculate_perimeter(base, height),
         "height": height,
         "base": base,
@@ -176,36 +145,44 @@ def triangle_master(base, height, return_diagram=False, return_dictionary=False)
 
 
 def wordy_pyramid():
-    baseURL = (
-        "https://us-central1-waldenpondpress.cloudfunctions.net/"
-        "give_me_a_word?wordlength={length}"
-    )
-    pyramid_list = []
-    for i in range(3, 21, 2):
-        url = baseURL.format(length=i)
-        r = requests.get(url)
-        if r.status_code is 200:
-            message = r.text
-            pyramid_list.append(message)
-        else:
-            print("failed a request", r.status_code, i)
-    for i in range(20, 3, -2):
-        url = baseURL.format(length=i)
-        r = requests.get(url)
-        if r.status_code is 200:
-            message = r.text
-            pyramid_list.append(message)
-        else:
-            print("failed a request", r.status_code, i)
+    pyramid = []
+    Length = [3, 5, 7, 9, 11, 13, 15, 17, 19, 20, 18, 16, 14, 12, 10, 8, 6, 4]
+    pyramid.extend(list_of_words_with_lengths(Length))
 
-    return pyramid_list
+    return pyramid
 
 
 def get_a_word_of_length_n(length):
-    
+    import requests
+
+    source = "https://us-central1-waldenpondpress.cloudfunctions.net/give_me_a_word?wordlength={wordlength}"
+
+    source_with_length = source.format(wordlength=length)
+    Get_word = requests.get(source_with_length)
+
+    if Get_word.status_code is 200:
+        wordstring = str(Get_word.content)
+        word_output = wordstring.split("'")
+        output = word_output[1]
+        return output
+
 
 def list_of_words_with_lengths(list_of_lengths):
-    pass
+    import requests
+
+    source = "https://us-central1-waldenpondpress.cloudfunctions.net/give_me_a_word?wordlength={wordlength}"
+
+    output = []
+
+    for i in list_of_lengths:
+        source_with_length = source.format(wordlength=i)
+        Get_word = requests.get(source_with_length)
+
+        if Get_word.status_code is 200:
+            wordstring = str(Get_word.content)
+            word_output = wordstring.split("'")
+            output.append(word_output[1])
+    return output
 
 
 if __name__ == "__main__":
