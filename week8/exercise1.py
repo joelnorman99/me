@@ -259,18 +259,25 @@ def fast_filler(number_of_words=200):
     import os
     import json
 
-    wd = {
-        3: ["ubc", "ian", "zac"],
-        4: ["ired", "iowt", "yeah"],
-        5: ["ivied", "faade", "yquem"],
-        6: ["icones", "yclept", "youden"],
-        7: ["yummier", "wabbled", "ycleped"],
-    }
-
-    json = json.dumps(wd)
-    f = open("dict_racey.json", "w")
-    f.write(json)
-    f.close()
+    myylist = []
+    if os.path.isfile("dict_racey.json"):
+        print("loading from file")
+    else:
+        dictt = make_filler_text_dictionary()
+        f = open("dict_racey.json", "w")
+        abba = json.dumps(dictt)
+        f.write(abba)
+        f.close
+    f = open("dict_racey.json", "r")
+    content = f.read()
+    datadict = json.loads(content)
+    for i in range(0, number_of_words):
+        xii = str(random.randint(3, 7))
+        xuu = random.randint(0, 2)
+        myylist.append(datadict[xii][xuu].capitalize())
+    x = ", ".join(myylist)
+    y = x + "."
+    return y
 
     # words = []
     # fname = "dict_racey.json"
