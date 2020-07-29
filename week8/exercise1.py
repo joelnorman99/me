@@ -259,24 +259,24 @@ def fast_filler(number_of_words=200):
     import os
     import json
 
-    # words = []
-    # fname = "dict_racey.json"
-    # if fname in os.listdir("week8"):
-    #     file = open("week8\dict_racey.json", "r")
-    #     data = json.load(file)
-    #     data = {int(x): v for x, v in data.items()}
-    # else:
-    #     data = make_filler_text_dictionary()
-    #     j = json.dumps(data)
-    #     lst = open("week8\dict_racey.json", "w+")
-    #     lst.write(j)
-    # for i in range(number_of_words):
-    #     length = random.randint(3, 6)
-    #     word = random.randint(0, 2)
-    #     words.append(data[length][word])
-    # para = " ".join(words)
-    # para = para[0].upper() + para[1:]
-    # return para + "."
+    words = []
+    fname = "dict_racey.json"
+    if fname in os.listdir("week8"):
+        file = open("week8\dict_racey.json", "r")
+        data = json.load(file)
+        data = {int(x): v for x, v in data.items()}
+    else:
+        data = make_filler_text_dictionary()
+        j = json.dumps(data)
+        lst = open("week8\dict_racey.json", "w+")
+        lst.write(j)
+    for i in range(number_of_words):
+        length = random.randint(3, 6)
+        word = random.randint(0, 2)
+        words.append(data[length][word])
+    para = " ".join(words)
+    para = para[0].upper() + para[1:]
+    return para + "."
 
 
 if __name__ == "__main__":
