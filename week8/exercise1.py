@@ -28,7 +28,7 @@ def list_please() -> list:
 
 def dictionary_please() -> dict:
     """Returns a dictionary, anything you like."""
-    d = dict()
+    d = {}
     return d
 
 
