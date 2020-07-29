@@ -259,44 +259,30 @@ def fast_filler(number_of_words=200):
     import os
     import json
 
-    myylist = []
-    if os.path.isfile("dict_racey.json"):
-        print("loading from file")
-    else:
-        dictt = make_filler_text_dictionary()
-        f = open("dict_racey.json", "w")
-        abba = json.dumps(dictt)
-        f.write(abba)
-        f.close
-    f = open("dict_racey.json", "r")
-    content = f.read()
-    datadict = json.loads(content)
-    for i in range(0, number_of_words):
-        xii = str(random.randint(3, 7))
-        xuu = random.randint(0, 2)
-        myylist.append(datadict[xii][xuu].capitalize())
-    x = ", ".join(myylist)
-    y = x + "."
-    return y
+    fname = "dict_racey.json"
+    words = []
 
-    # words = []
-    # fname = "dict_racey.json"
-    # if fname in os.listdir("week8"):
-    #     file = open("dict_racey.json", "r")
-    #     data = json.load(file)
-    #     data = {int(x): v for x, v in data.items()}
-    # else:
-    #     data = make_filler_text_dictionary()
-    #     j = json.dumps(data)
-    #     lst = open("dict_racey.json", "w+")
-    #     lst.write(j)
-    # for i in range(number_of_words):
-    #     length = random.randint(3, 6)
-    #     word = random.randint(0, 2)
-    #     words.append(data[length][word])
-    # para = " ".join(words)
-    # para = para[0].upper() + para[1:]
-    # return para + "."
+    if os.path.isfile(fname):
+        print("getting json file")
+
+    else:
+        new_dict = make_filler_text_dictionary()
+        j = open(fname, "w")
+        save_file = json.dumps(new_dict)
+        j.write(save_file)
+        j.close
+    j = open(fname, "r")
+    contents = j.read()
+    data = json.loads(contents)
+
+    for i in range(0, number_of_words):
+        numbers = str(random.randint(3, 7))
+        index = random.randint(0, 2)
+        words.append(data[numbers][index].capitalize())
+
+    joining = " ".join(words)
+    joining = joining[0].upper() + joining[1:]
+    return joining + "."
 
 
 if __name__ == "__main__":
