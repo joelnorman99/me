@@ -259,19 +259,6 @@ def fast_filler(number_of_words=200):
     import os
     import json
 
-    dict = {
-        3: ["yan", "aaa", "mab"],
-        4: ["icky", "iwis", "iuus"],
-        5: ["ylems", "iortn", "qaids"],
-        6: ["kababs", "dabbed", "yowden"],
-        7: ["yodlers", "qabbala", "caaming"],
-    }
-
-    json = json.dumps(dict)
-    f = open("dict_racey.json", "w")
-    f.write(json)
-    f.close()
-
     # words = []
     # fname = "dict_racey.json"
     # if fname in os.listdir("week8"):
