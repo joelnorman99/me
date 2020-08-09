@@ -11,3 +11,5 @@ UPDATE: Had to copy and paste the original code since my tests weren't passing (
 
 perimeter = ((height _ height) + (base _ base)) \*\* (1 / 2) + base + height
 return perimeter
+
+READ OVER EXERCISES FOR EXAM
