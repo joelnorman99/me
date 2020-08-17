@@ -20,3 +20,4 @@ else:
 print("i is no longer less than 6")
 
 'break' stop a while loop - Needed this when python input an infinite list of 100
+\
